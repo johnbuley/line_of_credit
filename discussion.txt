@@ -1,0 +1,42 @@
+Overview
+
+The module calculates interest looking-back at 30-day intervals.
+Principal outstanding at 30 days is rolled over to the next
+statement.  After an additional 30 days, interest is charged
+on this rolled-over amount, but not on unpaid interest.
+
+When a payment is made on an Account, the interest due takes
+precedence, followed by the principal.
+
+----------
+The module is composed of two classes: Bank and Account.  
+
+A Bank:
+--can hold multiple Accounts
+--provides a unique transaction id when requested by an Account
+--provides a public interface for interacting with an Account
+
+An Account:
+--stores both a persistent transaction history, and a statement for
+  the current 30-day period which is cleared at the end of the period,
+  after which the outstanding principal is re-appended to the
+  statement
+--handles calculation of interest, storage of balance, etc.
+--processes draws and payments
+
+
+----------
+Input-checking is done in two stages.  For draws, payments, and
+request of transaction history, the Bank checks that the given
+id is valid.  Then, the Account checks that the draw is not
+over the remaining credit or that the payment is not over
+the balance.  If either condition is violated, the Account
+prints a message and returns 0.  Else, it calls the corresponding
+internal method and returns 1.
+
+
+----------
+Current date is stored in the Bank.  This can be controlled
+with either Bank.increment_date(), or Bank.advance_date(days).
+Both check at each incremented day whether an account has
+hit a 30-day statement close date.
