@@ -1,7 +1,7 @@
 Description of functionality is found in discussion.txt
 An example is found in test.py
 
-Usage:
+Classes:
 
 class Bank
 
