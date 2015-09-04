@@ -47,3 +47,4 @@ class Account
 						outstanding principal
 
     get_transaction_history()			returns transaction history as list
+						result is unformatted
